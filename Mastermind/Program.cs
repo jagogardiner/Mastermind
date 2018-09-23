@@ -24,9 +24,19 @@ namespace Mastermind
                 case ("1"):
                 case ("1."):
                 case ("easy"):
-                case ("1. easy"):
                 case ("Easy"):
+                case ("1. easy"):
+                case ("1. Easy"):
                     easy();
+                    break;
+
+                case ("2"):
+                case ("2."):
+                case ("normal"):
+                case ("Normal"):
+                case ("2. normal"):
+                case ("2. Normal"):
+                    
                     break;
             }
         }
@@ -42,9 +52,10 @@ namespace Mastermind
                 correct += answer[i] * Convert.ToInt32(Math.Pow(10, answer.Length - i - 1));
             }
             Console.WriteLine("Game started! (Easy mode)");
+            Console.WriteLine(correct);
             Console.WriteLine("Your guess:");
             int response = Convert.ToInt32(Console.ReadLine());
-
+            var digits = response.ToString().Select(t => int.Parse(t.ToString())).ToArray();
             if (response == correct)
             {
                 Console.WriteLine("Well done! You guessed the number!");
@@ -54,8 +65,24 @@ namespace Mastermind
             }
             else if (response != correct)
             {
-
+                if(digits[0] == answer[0])
+                {
+                    Console.WriteLine("The first number, "+answer[0]+", is correct and at the right location!");
+                }
+                else if (digits[1] == answer[0])
+                {
+                    Console.WriteLine("The first number, "+answer[0], "is correct but not at the right location!");
+                }
+                else if (digits[2] == answer[0])
+                {
+                    Console.WriteLine("The first number, " + answer[0], "is correct but not at the right location!");
+                }
+                else if (digits[3] == answer[0])
+                {
+                    Console.WriteLine("The first number, " + answer[0], "is correct but not at the right location!");
+                }
             }
+            Console.ReadKey();
         }
         public void leaderboards()
         {
@@ -90,12 +117,7 @@ namespace Mastermind
         static void Main(string[] args)
         {
             Program program = new Program();
-            int[] show = generate4Digit();
-            for (int i = 0; i < 4; i++)
-            {
-                Console.WriteLine("at index" + i + ": " + show[i]);
-            }
-            Console.ReadKey();
+            program.easy();
         }
     }
 }
